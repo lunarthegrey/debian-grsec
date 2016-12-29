@@ -13,7 +13,7 @@ else
 fi
 
 while true; do
-    read -p "To apply the new grsec kernel you must reboot. Would you like to reboot now?" yn
+    read -p "To apply the new grsec kernel you must reboot. Would you like to reboot now? " yn
     case $yn in
         [Yy]* ) reboot; break;;
         [Nn]* ) exit;;
