@@ -1,3 +1,6 @@
+Read more about grsecurity here: https://wiki.debian.org/grsecurity
+<br />
+<br />
 To run it, use these commands:
 <br />
 <br />
