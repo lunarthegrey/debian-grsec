@@ -4,7 +4,7 @@
 To run it, use these commands:
 <br />
 <br />
-<code>wget https://github.com/lunarthegrey/debian-jessie-grsec/raw/master/grsec-jessie.sh</code>
+<code>wget https://github.com/lunarthegrey/debian-grsec/raw/master/debian-grsec-installer.sh</code>
 <br />
 <br />
-<code>bash grsec-jessie.sh</code>
+<code>bash debian-grsec-installer.sh</code>
