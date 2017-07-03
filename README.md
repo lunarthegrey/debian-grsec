@@ -1,6 +1,3 @@
-Read more about grsecurity here: https://wiki.debian.org/grsecurity
-<br />
-<br />
 **Notes:**
 * Currently only works (automatically) with grub as your default bootloader
 <br />
