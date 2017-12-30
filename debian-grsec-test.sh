@@ -8,16 +8,24 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+# Checking if curl is Installed
+if [ ! -x  /usr/bin/curl ]; then
+  echo -e "\033[31mcurl Command Not Found\e[0m"
+  echo -e "\033[34mInstalling curl, Please Wait...\e[0m"
+apt-get install curl
+fi
+
 while [ ! $# -eq 0 ]
 do
-case "$1" in
---install | -i)
+  case "$1" in
+
+  --install | -i)
     
   # Force stable package prefences, for some reason only works with apt-get
   cat << EOF > /etc/apt/preferences.d/force-stable
-  Package: *
-  Pin: release a=stable
-  Pin-Priority: 1001
+    Package: *
+    Pin: release a=stable
+    Pin-Priority: 1001
   EOF
 
   # Add sid to sources.list and apt-get update
@@ -50,8 +58,10 @@ exit
 ;;
         
 --update | -u)
+
   apt-get update
-	# Check if you're on 32bit or 64bit, install the correct kernel from sid and add it to grub
+  
+  # Check if you're on 32bit or 64bit, install the correct kernel from sid and add it to grub
   MACHINE_TYPE=`uname -m`
   if [ ${MACHINE_TYPE} == 'x86_64' ]; then
     apt-get -t sid install -y linux-image-grsec-amd64 linux-image-{$VERSION}-grsec-amd64
