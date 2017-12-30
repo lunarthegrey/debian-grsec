@@ -8,11 +8,19 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
-# Checking if curl is Installed
+# Checking if curl is installed
 if [ ! -x  /usr/bin/curl ]; then
   echo -e "\033[31mcurl Command Not Found\e[0m"
   echo -e "\033[34mInstalling curl, Please Wait...\e[0m"
 apt-get install curl
+fi
+
+# Fetching the latest script version
+read -p "Do you want to grab the latest version of the script? *RECOMMENDED* (Y/N)" REPLY
+if [ "${REPLY,,}" == "y" ]; then
+  curl https://raw.githubusercontent.com/lunarthegrey/debian-grsec/master/debian-grsec.sh -o /root/debian-grsec.sh
+  echo "Please re-run the script: bash /root/debian-grsec.sh"
+  exit
 fi
 
 while [ ! $# -eq 0 ]
@@ -20,6 +28,13 @@ do
   case "$1" in
 
   --install | -i)
+  
+# Updating / Upgrading System
+read -p "Do you wish to upgrade system packages? (Y/N)" REPLY
+if [ "${REPLY,,}" == "y" ]; then
+  apt-get update
+  apt-get dist-upgrade
+fi
     
   # Force stable package prefences, for some reason only works with apt-get
   cat << EOF > /etc/apt/preferences.d/force-stable
@@ -29,7 +44,7 @@ do
   EOF
 
   # Add sid to sources.list and apt-get update
-  echo "deb http://http.debian.net/debian/ sid main contrib" | tee -a /etc/apt/sources.list
+  echo "deb http://http.debian.net/debian/ sid main contrib" > /etc/apt/sources.list.d/sid.list
   apt-get update
 
   # Check if you're on 32bit or 64bit, install the correct kernel from sid and add it to grub
