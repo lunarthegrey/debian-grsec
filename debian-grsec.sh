@@ -29,23 +29,29 @@ do
 
   --install | -i)
   
-# Updating / Upgrading System
-read -p "Do you wish to upgrade system packages? (Y/N)" REPLY
-if [ "${REPLY,,}" == "y" ]; then
-  apt-get update
-  apt-get dist-upgrade
-fi
+  # Updating / Upgrading System
+  read -p "Do you wish to upgrade system packages? (Y/N)" REPLY
+  if [ "${REPLY,,}" == "y" ]; then
+    apt-get update
+    apt-get dist-upgrade
+  fi
     
   # Force stable package prefences, for some reason only works with apt-get
-  cat << EOF > /etc/apt/preferences.d/force-stable
-    Package: *
-    Pin: release a=stable
-    Pin-Priority: 1001
-  EOF
+  read -p "Do you want to force stable packages system wide? *RECOMMENDED* (Y/N)" REPLY
+  if [ "${REPLY,,}" == "y" ]; then
+    cat << EOF > /etc/apt/preferences.d/force-stable
+      Package: *
+      Pin: release a=stable
+      Pin-Priority: 1001
+    EOF
+  fi
 
   # Add sid to sources.list and apt-get update
-  echo "deb http://http.debian.net/debian/ sid main contrib" > /etc/apt/sources.list.d/sid.list
-  apt-get update
+  read -p "Do you want to add the Debian sid repository? *REQUIRED* (Y/N)" REPLY
+  if [ "${REPLY,,}" == "y" ]; then
+    echo "deb http://http.debian.net/debian/ sid main contrib" > /etc/apt/sources.list.d/sid.list
+    apt-get update
+  fi
 
   # Check if you're on 32bit or 64bit, install the correct kernel from sid and add it to grub
   MACHINE_TYPE=`uname -m`
