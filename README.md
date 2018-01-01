@@ -4,7 +4,16 @@
 To run it, use these commands:
 <br />
 <br />
-<code>wget https://github.com/lunarthegrey/debian-grsec/raw/master/debian-grsec-installer.sh</code>
+<code>curl https://github.com/lunarthegrey/debian-grsec/raw/master/debian-grsec.sh -o /root/debian-grsec.sh</code>
 <br />
 <br />
-<code>bash debian-grsec-installer.sh</code>
+To install:
+<br />
+<br />
+<code>bash /root/debian-grsec.sh --install</code>
+<br />
+<br />
+To update kernel:
+<br />
+<br />
+<code>bash /root/debian-grsec.sh --update</code>
