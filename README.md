@@ -10,10 +10,10 @@ To run it, use these commands:
 To install:
 <br />
 <br />
-<code>bash /root/debian-grsec.sh --install</code>
+<code>bash /root/debian-grsec.sh -i</code>
 <br />
 <br />
 To update kernel:
 <br />
 <br />
-<code>bash /root/debian-grsec.sh --update</code>
+<code>bash /root/debian-grsec.sh -u</code>
