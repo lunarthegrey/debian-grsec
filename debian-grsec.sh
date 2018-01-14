@@ -55,11 +55,11 @@ EOF
   MACHINE_TYPE=`uname -m`
   if [ ${MACHINE_TYPE} == 'x86_64' ]; then
     apt-get -t sid install -y linux-image-grsec-amd64
-    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux {$VERSION}-grsec-amd64"/g' $GRUB
+    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-amd64"/g' $GRUB
     update-grub
   else
     apt-get -t sid install -y linux-image-grsec-i386
-    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux {$VERSION}-grsec-i386"/g' $GRUB
+    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-i386"/g' $GRUB
     update-grub
   fi
 
@@ -78,11 +78,11 @@ EOF
   MACHINE_TYPE=`uname -m`
   if [ ${MACHINE_TYPE} == 'x86_64' ]; then
     apt-get -t sid install -y linux-image-grsec-amd64 linux-image-{$VERSION}-grsec-amd64
-    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux {$VERSION}-grsec-amd64"/g' $GRUB
+    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-amd64"/g' $GRUB
     update-grub
   else
     apt-get -t sid install -y linux-image-grsec-i386 linux-image-{$VERSION}-grsec-i386
-    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux {$VERSION}-grsec-i386"/g' $GRUB
+    sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-i386"/g' $GRUB
     update-grub
   fi
   ;;
