@@ -2,6 +2,10 @@
 GRUB="/etc/default/grub"
 VERSION="4.9.0-4"
 
+  echo "Please pick an option..."
+  echo "Install: bash debian-grsec.sh -i"
+  echo "Update: bash debian-grsec.sh -u"
+
   while getopts ":iu" opt; do
   case $opt in
   i)
@@ -23,7 +27,7 @@ VERSION="4.9.0-4"
   read -p "Do you want to grab the latest version of the script? *RECOMMENDED* (Y/N) " REPLY
   if [ "${REPLY,,}" == "y" ]; then
     curl https://raw.githubusercontent.com/lunarthegrey/debian-grsec/master/debian-grsec.sh -o /root/debian-grsec.sh
-    echo "Please re-run the script: bash /root/debian-grsec.sh"
+    echo "Please re-run the script with the -i (install) or -u (update) flag"
   exit
   fi
 
@@ -54,11 +58,11 @@ EOF
   # Check if you're on 32bit or 64bit, install the correct kernel from sid and add it to grub
   MACHINE_TYPE=`uname -m`
   if [ ${MACHINE_TYPE} == 'x86_64' ]; then
-    apt-get -t sid install -y linux-image-grsec-amd64
+    apt-get -t sid install -y linux-image-grsec-amd64 linux-image-"$VERSION"-grsec-amd64
     sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-amd64"/g' $GRUB
     update-grub
   else
-    apt-get -t sid install -y linux-image-grsec-i386
+    apt-get -t sid install -y linux-image-grsec-i386 linux-image-"$VERSION"-grsec-i386
     sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-i386"/g' $GRUB
     update-grub
   fi
@@ -89,7 +93,7 @@ EOF
   read -p "Do you want to grab the latest version of the script? *RECOMMENDED* (Y/N) " REPLY
   if [ "${REPLY,,}" == "y" ]; then
     curl https://raw.githubusercontent.com/lunarthegrey/debian-grsec/master/debian-grsec.sh -o /root/debian-grsec.sh
-    echo "Please re-run the script: bash /root/debian-grsec.sh"
+    echo "Please re-run the script with the -i (install) or -u (update) flag"
   exit
   fi
 
@@ -105,11 +109,11 @@ EOF
   # Check if you're on 32bit or 64bit, install the correct kernel from sid and add it to grub
   MACHINE_TYPE=`uname -m`
   if [ ${MACHINE_TYPE} == 'x86_64' ]; then
-    apt-get -t sid install -y linux-image-grsec-amd64 linux-image-{$VERSION}-grsec-amd64
+    apt-get -t sid install -y linux-image-grsec-amd64 linux-image-"$VERSION"-grsec-amd64
     sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-amd64"/g' $GRUB
     update-grub
   else
-    apt-get -t sid install -y linux-image-grsec-i386 linux-image-{$VERSION}-grsec-i386
+    apt-get -t sid install -y linux-image-grsec-i386 linux-image-"$VERSION"-grsec-i386
     sed -i 's/GRUB_DEFAULT=.*/GRUB_DEFAULT="Advanced options for Debian GNU\/Linux>Debian GNU\/Linux, with Linux '"$VERSION"'-grsec-i386"/g' $GRUB
     update-grub
   fi
